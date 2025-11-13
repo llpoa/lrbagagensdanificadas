@@ -1,5 +1,5 @@
 // URL do backend
-const BACKEND_URL = "https://lrbagagensdanificadas.vercel.app/api/enviar";
+const BACKEND_URL = "lrbagagensdanificadas-1nxv.vercel.app";
 
 // Função para formatar localizador
 function formatarLocalizador(input) {
