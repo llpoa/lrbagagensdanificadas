@@ -3,7 +3,7 @@ const msalConfig = {
   auth: {
     clientId: "dcdf4c14-16f6-4c92-b736-d8e65a2816ab",
     authority: "https://login.microsoftonline.com/442489c2-1fd2-497a-9581-7529aeeb776a",
-    redirectUri: "https://lrbagagensdanificadas-o4sa0md3d-llpoas-projects.vercel.app"
+    redirectUri: "https://lrbagagensdanificadas.vercel.app/"
   },
   cache: { cacheLocation: "sessionStorage" }
 };
@@ -13,7 +13,7 @@ const msalInstance = new msal.PublicClientApplication(msalConfig);
 const graphScopes = ["Files.ReadWrite", "Mail.Send"];
 
 // URL do backend — vamos preencher na Parte 4 com a URL do Vercel
-const BACKEND_URL = "https://lrbagagensdanificadas-o4sa0md3d-llpoas-projects.vercel.app/api/enviar";
+const BACKEND_URL = "https://lrbagagensdanificadas.vercel.app/api/enviar";
 
 function formatarLocalizador(input) {
   input.value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
