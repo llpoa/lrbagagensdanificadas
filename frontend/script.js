@@ -1,17 +1,3 @@
-// Configuração MSAL — IDs do Azure
-const msalConfig = {
-  auth: {
-    clientId: "dcdf4c14-16f6-4c92-b736-d8e65a2816ab",
-    authority: "https://login.microsoftonline.com/common",
-    redirectUri: "https://lrbagagensdanificadas.vercel.app/"
-  },
-  cache: { cacheLocation: "sessionStorage" }
-};
-const msalInstance = new msal.PublicClientApplication(msalConfig);
-
-// Escopos para Graph
-const graphScopes = ["Files.ReadWrite", "Mail.Send"];
-
 // URL do backend
 const BACKEND_URL = "https://lrbagagensdanificadas.vercel.app/api/enviar";
 
@@ -77,17 +63,6 @@ fileInput.addEventListener("change", () => {
   });
 });
 
-// Obter token MSAL
-async function getToken() {
-  try {
-    const res = await msalInstance.acquireTokenSilent({ scopes: graphScopes });
-    return res.accessToken;
-  } catch {
-    const res = await msalInstance.acquireTokenPopup({ scopes: graphScopes });
-    return res.accessToken;
-  }
-}
-
 // Enviar arquivos
 enviarBtn.onclick = async () => {
   const localizador = document.getElementById("localizador").value.trim();
@@ -103,7 +78,6 @@ enviarBtn.onclick = async () => {
   }
 
   try {
-    const token = await getToken();
     const formData = new FormData();
 
     files.forEach((file, index) => {
@@ -122,14 +96,21 @@ enviarBtn.onclick = async () => {
 
     const resp = await fetch(`${BACKEND_URL}`, {
       method: "POST",
-      headers: { "Authorization": `Bearer ${token}` },
       body: formData
     });
 
-    const json = await resp.json();
+    let json;
+    try {
+      json = await resp.json();
+    } catch {
+      const text = await resp.text();
+      throw new Error(`Resposta não-JSON do servidor: ${text}`);
+    }
+
     if (!resp.ok) throw new Error(json.error || "Erro no backend");
     alert("Arquivos salvos no OneDrive e e‑mail enviado!");
   } catch (e) {
     alert("Falha ao enviar: " + e.message);
   }
 };
+
