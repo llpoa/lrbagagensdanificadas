@@ -2,7 +2,7 @@
 const msalConfig = {
   auth: {
     clientId: "dcdf4c14-16f6-4c92-b736-d8e65a2816ab",
-    authority: "https://login.microsoftonline.com/442489c2-1fd2-497a-9581-7529aeeb776a",
+    authority: "https://login.microsoftonline.com/common",
     redirectUri: "https://lrbagagensdanificadas.vercel.app/"
   },
   cache: { cacheLocation: "sessionStorage" }
