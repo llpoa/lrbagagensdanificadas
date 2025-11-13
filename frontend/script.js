@@ -94,7 +94,13 @@ enviarBtn.onclick = async () => {
       body: formData
     });
 
-    const data = await resp.json(); // lê apenas uma vez
+    let data;
+    try {
+      data = await resp.json(); // tenta ler como JSON
+    } catch {
+      const text = await resp.text(); // se não for JSON, captura texto
+      throw new Error(`Resposta inesperada do servidor: ${text.slice(0,200)}`);
+    }
 
     if (!resp.ok) throw new Error(data.error || "Erro no backend");
     alert("Arquivos salvos no OneDrive e e‑mail enviado!");
@@ -102,4 +108,3 @@ enviarBtn.onclick = async () => {
     alert("Falha ao enviar: " + e.message);
   }
 };
-
