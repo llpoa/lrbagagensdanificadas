@@ -4,33 +4,31 @@
   <meta charset="UTF-8">
   <title>Enviar LR</title>
   <link rel="stylesheet" href="style.css">
-  <!-- Primeiro carrega a biblioteca MSAL -->
-<script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
 
-<!-- Depois carrega o seu script -->
-<script defer src="script.js"></script>
+  <!-- Biblioteca MSAL -->
+  <script src="https://alcdn.msauth.net/browser/2.38.0/js/msal-browser.min.js"></script>
 
+  <!-- Seu script -->
+  <script defer src="script.js"></script>
 </head>
 <body>
   <div class="container">
     <h1>Enviar LR</h1>
 
-
+    <!-- Campo Localizador -->
     <label for="localizador">Localizador (6 caracteres):</label>
-    <input type="text" id="localizador" maxlength="6" placeholder="ABC123" oninput="formatarLocalizador(this)">
+    <input type="text" id="localizador" maxlength="6" placeholder="ABC123" oninput="formatarLocalizador(this)" required>
 
-   <label for="arquivo">Arquivos (até 5 fotos):</label>
-<input type="file" id="arquivo" name="arquivo" accept="image/*" multiple capture="environment" required>
-<div id="preview"></div>
+    <!-- Upload de arquivos -->
+    <label for="arquivo">Arquivos (fotos):</label>
+    <input type="file" id="arquivo" name="arquivo" accept="image/*" multiple capture="environment" required>
 
+    <!-- Pré-visualização -->
+    <div id="preview"></div>
+
+    <!-- Botão de envio -->
     <div class="buttons">
       <button id="enviarBtn">Salvar no OneDrive e enviar e‑mail</button>
-    </div>
-
-    <div id="preview">
-      <h2>Pré‑visualização</h2>
-      <p id="preview-localizador"></p>
-      <img id="preview-img" src="" alt="Prévia" style="max-width:100%; display:none;">
     </div>
   </div>
 </body>
