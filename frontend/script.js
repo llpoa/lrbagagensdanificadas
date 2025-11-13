@@ -19,20 +19,17 @@ fileInput.addEventListener("change", () => {
   files.forEach((file, index) => {
     const reader = new FileReader();
     reader.onload = e => {
-      // container da imagem
       const wrapper = document.createElement("div");
       wrapper.style.position = "relative";
       wrapper.style.display = "inline-block";
       wrapper.style.margin = "5px";
 
-      // imagem
       const img = document.createElement("img");
       img.src = e.target.result;
       img.style.maxWidth = "150px";
       img.style.border = "1px solid #ccc";
       img.style.borderRadius = "4px";
 
-      // botão apagar
       const delBtn = document.createElement("span");
       delBtn.textContent = "X";
       delBtn.style.position = "absolute";
@@ -47,7 +44,6 @@ fileInput.addEventListener("change", () => {
 
       delBtn.onclick = () => {
         wrapper.remove();
-        // remove também do input
         const dt = new DataTransfer();
         Array.from(fileInput.files).forEach((f, i) => {
           if (i !== index) dt.items.add(f);
@@ -91,23 +87,17 @@ enviarBtn.onclick = async () => {
       formData.append("arquivo", renamedFile);
     });
 
-    // título do e-mail = apenas o localizador
     formData.append("localizador", localizador);
 
-    const resp = await fetch(`${BACKEND_URL}`, {
+    const resp = await fetch(BACKEND_URL, {
       method: "POST",
       body: formData
     });
 
-    let json;
-    try {
-      json = await resp.json();
-    } catch {
-      const text = await resp.text();
-      throw new Error(`Resposta não-JSON do servidor: ${text}`);
-    }
+    // Ler a resposta apenas uma vez
+    const data = await resp.json();
 
-    if (!resp.ok) throw new Error(json.error || "Erro no backend");
+    if (!resp.ok) throw new Error(data.error || "Erro no backend");
     alert("Arquivos salvos no OneDrive e e‑mail enviado!");
   } catch (e) {
     alert("Falha ao enviar: " + e.message);
