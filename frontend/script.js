@@ -36,6 +36,24 @@ document.getElementById("arquivo").addEventListener("change", (event) => {
 });
 
 const enviarBtn = document.getElementById("enviarBtn");
+const fileInput = document.getElementById("arquivo");
+const preview = document.getElementById("preview");
+
+fileInput.addEventListener("change", () => {
+  preview.innerHTML = ""; // limpa pré-visualização
+  const files = Array.from(fileInput.files).slice(0, 5); // máximo 5 arquivos
+
+  files.forEach(file => {
+    const reader = new FileReader();
+    reader.onload = e => {
+      const img = document.createElement("img");
+      img.src = e.target.result;
+      preview.appendChild(img);
+    };
+    reader.readAsDataURL(file);
+  });
+});
+
 const userInfo = document.getElementById("userInfo");
 
 loginBtn.onclick = async () => {
