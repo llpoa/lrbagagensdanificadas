@@ -5,9 +5,7 @@ import nextConnect from "next-connect";
 const upload = multer();
 
 // Função para obter token fixo da conta Hotmail
-// Aqui você deve implementar a lógica para renovar o token usando refresh_token
-// ou configurar como variável de ambiente. Para simplificação, estou assumindo
-// que você já tem um access_token válido em process.env.GRAPH_TOKEN.
+// Configure process.env.GRAPH_TOKEN no Vercel com o access_token ou lógica de refresh
 async function getAccessToken() {
   const token = process.env.GRAPH_TOKEN;
   if (!token) throw new Error("Token da conta Hotmail não configurado.");
@@ -56,7 +54,7 @@ async function sendMailWithAttachments(token, localizador, files) {
 
   const email = {
     message: {
-      subject: localizador, // título do e-mail = só o localizador
+      subject: localizador,
       body: {
         contentType: "Text",
         content: `Segue em anexo os arquivos referentes ao localizador ${localizador}`
@@ -86,4 +84,36 @@ async function sendMailWithAttachments(token, localizador, files) {
 
 const handler = nextConnect();
 
-// aceitar
+// aceitar múltiplos arquivos
+handler.use(upload.array("arquivo"));
+
+handler.post(async (req, res) => {
+  try {
+    const token = await getAccessToken();
+    const localizador = (req.body.localizador || "").toUpperCase();
+    const files = req.files || [];
+
+    if (!localizador || localizador.length !== 6) {
+      return res.status(400).json({ error: "Localizador inválido." });
+    }
+    if (files.length === 0) {
+      return res.status(400).json({ error: "Nenhum arquivo enviado." });
+    }
+
+    const metas = [];
+    for (let i = 0; i < files.length; i++) {
+      const meta = await uploadToOneDrive(token, localizador, files[i], i, files.length);
+      metas.push(meta);
+    }
+
+    await sendMailWithAttachments(token, localizador, files);
+
+    res.status(200).json({ status: "ok", driveItems: metas.map(m => m.id) });
+  } catch (e) {
+    console.error(e);
+    res.status(500).json({ error: e.message });
+  }
+});
+
+export default handler;
+
