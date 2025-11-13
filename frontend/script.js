@@ -1,9 +1,9 @@
 // Configuração MSAL — vamos preencher na Parte 3 com seus IDs do Azure
 const msalConfig = {
   auth: {
-    clientId: "COLOQUE_SEU_CLIENT_ID",
-    authority: "https://login.microsoftonline.com/COLOQUE_SEU_TENANT_ID",
-    redirectUri: "https://SEU_FRONTEND_URL" // exemplo: https://seuprojeto.vercel.app
+    clientId: "dcdf4c14-16f6-4c92-b736-d8e65a2816ab",
+    authority: "https://login.microsoftonline.com/442489c2-1fd2-497a-9581-7529aeeb776a",
+    redirectUri: "https://lrbagagensdanificadas-o4sa0md3d-llpoas-projects.vercel.app"
   },
   cache: { cacheLocation: "sessionStorage" }
 };
