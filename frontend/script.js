@@ -35,8 +35,6 @@ document.getElementById("arquivo").addEventListener("change", (event) => {
   }
 });
 
-const loginBtn = document.getElementById("loginBtn");
-const logoutBtn = document.getElementById("logoutBtn");
 const enviarBtn = document.getElementById("enviarBtn");
 const userInfo = document.getElementById("userInfo");
 
