@@ -41,7 +41,7 @@ const preview = document.getElementById("preview");
 
 fileInput.addEventListener("change", () => {
   preview.innerHTML = ""; // limpa pré-visualização
-  const files = Array.from(fileInput.files).slice(0, 5); // máximo 5 arquivos
+  const files = Array.from(fileInput.files); // pega todos os arquivos
 
   files.forEach(file => {
     const reader = new FileReader();
