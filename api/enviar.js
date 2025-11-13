@@ -35,7 +35,6 @@ async function sendMailWithAttachment(token, localizador, file) {
       subject: localizador,
       body: { contentType: "Text", content: `Segue em anexo o arquivo referente ao localizador ${localizador}` },
       toRecipients: [
-        { emailAddress: { address: "envio.evidencias@voeazul.com.br" } },
         { emailAddress: { address: "ll.poa@voeazul.com.br" } }
       ],
       attachments: [
