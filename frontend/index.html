@@ -19,8 +19,9 @@
     <label for="localizador">Localizador (6 caracteres):</label>
     <input type="text" id="localizador" maxlength="6" placeholder="ABC123" oninput="formatarLocalizador(this)">
 
-    <label for="arquivo">Selecione o arquivo (foto, PDF, etc.):</label>
-    <input type="file" id="arquivo" accept="image/*,application/pdf">
+   <label for="arquivo">Arquivos (até 5 fotos):</label>
+<input type="file" id="arquivo" name="arquivo" accept="image/*" multiple capture="environment" required>
+<div id="preview"></div>
 
     <div class="buttons">
       <button id="enviarBtn">Salvar no OneDrive e enviar e‑mail</button>
