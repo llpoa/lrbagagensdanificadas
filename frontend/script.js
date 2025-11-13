@@ -13,7 +13,7 @@ const preview = document.getElementById("preview");
 
 // Pré-visualização com botão de apagar
 fileInput.addEventListener("change", () => {
-  preview.innerHTML = ""; // limpa pré-visualização
+  preview.innerHTML = "";
   const files = Array.from(fileInput.files);
 
   files.forEach((file, index) => {
@@ -94,8 +94,7 @@ enviarBtn.onclick = async () => {
       body: formData
     });
 
-    // Ler a resposta apenas uma vez
-    const data = await resp.json();
+    const data = await resp.json(); // lê apenas uma vez
 
     if (!resp.ok) throw new Error(data.error || "Erro no backend");
     alert("Arquivos salvos no OneDrive e e‑mail enviado!");
