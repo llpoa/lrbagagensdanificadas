@@ -13,7 +13,7 @@ const msalInstance = new msal.PublicClientApplication(msalConfig);
 const graphScopes = ["Files.ReadWrite", "Mail.Send"];
 
 // URL do backend — vamos preencher na Parte 4 com a URL do Vercel
-const BACKEND_URL = "https://SEU_BACKEND_URL/api/enviar";
+const BACKEND_URL = "https://lrbagagensdanificadas-o4sa0md3d-llpoas-projects.vercel.app/api/enviar";
 
 function formatarLocalizador(input) {
   input.value = input.value.toUpperCase().replace(/[^A-Z0-9]/g, "");
