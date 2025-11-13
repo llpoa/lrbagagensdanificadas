@@ -94,11 +94,13 @@ enviarBtn.onclick = async () => {
       body: formData
     });
 
+    // Ler o corpo apenas uma vez
     let data;
-    try {
-      data = await resp.json(); // tenta ler como JSON
-    } catch {
-      const text = await resp.text(); // se não for JSON, captura texto
+    const contentType = resp.headers.get("content-type") || "";
+    if (contentType.includes("application/json")) {
+      data = await resp.json();
+    } else {
+      const text = await resp.text();
       throw new Error(`Resposta inesperada do servidor: ${text.slice(0,200)}`);
     }
 
