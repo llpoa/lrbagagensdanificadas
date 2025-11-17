@@ -4,8 +4,10 @@ body {
   margin: 0;
 }
 
+/* CONTAINER RESPONSIVO */
 .container {
   max-width: 500px;
+  width: 90%;             /* ocupa quase toda a tela no celular */
   margin: 40px auto;
   background: #fff;
   padding: 20px;
@@ -24,16 +26,18 @@ label {
   font-weight: bold;
 }
 
+/* INPUT RESPONSIVO */
 input[type="text"] {
-  width: 60%;
-  padding: 10px;
-  margin-top: 5px auto;
+  width: 100%;           /* 100% da largura no mobile */
+  padding: 12px;
+  margin-top: 5px;
   border: 1px solid #ccc;
   border-radius: 8px;
-  font-size:16px;
-  display: block;
+  font-size: 16px;
+  box-sizing: border-box;
 }
-****
+
+/* BOTÕES */
 .buttons {
   margin-top: 18px;
   text-align: center;
@@ -43,17 +47,21 @@ button {
   background: #0078d7;
   color: #fff;
   border: none;
-  padding: 10px 18px;
+  padding: 12px 20px;
   margin: 6px;
-  border-radius: 4px;
+  border-radius: 6px;
   cursor: pointer;
   transition: background 0.2s ease;
+  font-size: 16px;
+  width: 100%;           /* botões em largura total no mobile */
+  max-width: 250px;      /* mas não exageram no desktop */
 }
 
 button:hover {
   background: #005a9e;
 }
 
+/* PREVIEW */
 #preview {
   margin-top: 22px;
   padding: 12px;
@@ -62,5 +70,22 @@ button:hover {
   background: #fafafa;
   display: flex;
   flex-wrap: wrap;
-  gap: 12
+  gap: 12px;
+}
+
+/* --- BREAKPOINT --- */
+/* Melhorias em telas muito pequenas */
+@media (max-width: 480px) {
+  h1 {
+    font-size: 22px;
+  }
+
+  button {
+    font-size: 15px;
+    padding: 10px 16px;
+  }
+
+  .container {
+    padding: 15px;
+  }
 }
