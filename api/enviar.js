@@ -13,6 +13,9 @@ async function getAccessToken() {
 
 async function uploadToOneDrive(token, localizador, file, index, total) {
   const extension = file.originalname.split(".").pop();
+  console.log(extension);
+  console.log(localizador);
+
   let filename;
   if (total === 1) {
     filename = `${localizador}.${extension}`;
@@ -21,6 +24,7 @@ async function uploadToOneDrive(token, localizador, file, index, total) {
   }
 
   const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Evidencias/${filename}:/content`;
+  console.log("URL" + url);
 
   const resp = await fetch(url, {
     method: "PUT",
@@ -59,14 +63,14 @@ async function sendMailWithAttachments(token, localizador, files) {
         content: `Segue em anexo os arquivos referentes ao localizador ${localizador}`
       },
       toRecipients: [
-        { emailAddress: { address: "ll.poa@voeazul.com.br" } }
+        { emailAddress: { address: "ll.poa@hotmail.com" } }
       ],
       attachments
     },
     saveToSentItems: true
   };
 
-  const resp = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", {
+  const resp = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", { // não existe
     method: "POST",
     headers: {
       "Authorization": `Bearer ${token}`,
