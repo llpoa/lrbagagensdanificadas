@@ -7,6 +7,7 @@ const upload = multer();
 // Função para obter token fixo da conta Hotmail
 async function getAccessToken() {
   const token = process.env.GRAPH_TOKEN;
+  console.log(GRAPH_TOKEN);
   if (!token) throw new Error("Token da conta Hotmail não configurado.");
   return token;
 }
