@@ -17,6 +17,7 @@ async function uploadToOneDrive(token, localizador, file, index, total) {
   console.log(extension);
   console.log(localizador);
 
+  // ver depois
   let filename;
   if (total === 1) {
     filename = `${localizador}.${extension}`;
@@ -31,7 +32,8 @@ async function uploadToOneDrive(token, localizador, file, index, total) {
     method: "PUT",
     headers: {
       "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/octet-stream"
+      "Content-Type": "application/octet-stream",
+      "Access-Control-Allow-Origin": "https://lrbagagensdanificadas.vercel.app/"
     },
     body: file.buffer
   });
@@ -75,7 +77,8 @@ async function sendMailWithAttachments(token, localizador, files) {
     method: "POST",
     headers: {
       "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      //"Access-Control-Allow-Origin": "https://lrbagagensdanificadas.vercel.app/"
     },
     body: JSON.stringify(email)
   });
