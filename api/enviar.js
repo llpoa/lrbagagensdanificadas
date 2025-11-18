@@ -78,7 +78,7 @@ async function sendMailWithAttachments(token, localizador, files) {
     headers: {
       "Authorization": `Bearer ${token}`,
       "Content-Type": "application/json",
-      //"Access-Control-Allow-Origin": "https://lrbagagensdanificadas.vercel.app/"
+      "Access-Control-Allow-Origin": "https://lrbagagensdanificadas.vercel.app/"
     },
     body: JSON.stringify(email)
   });
