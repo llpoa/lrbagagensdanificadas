@@ -4,31 +4,34 @@ body {
   margin: 0;
 }
 
-/* CONTAINER RESPONSIVO */
+/* CONTAINER GERAL */
 .container {
-  max-width: 500px;
-  width: 90%;             /* ocupa quase toda a tela no celular */
-  margin: 40px auto;
+  width: 95%;            /* adapta melhor no mobile */
+  max-width: 480px;      /* limite reduzido para HD */
+  margin: 30px auto;
   background: #fff;
-  padding: 20px;
+  padding: 18px;
   border-radius: 12px;
   box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+  box-sizing: border-box;
 }
 
 h1 {
   text-align: center;
   color: #023e8a;
+  font-size: 24px;
 }
 
 label {
   display: block;
   margin-top: 15px;
   font-weight: bold;
+  font-size: 16px;
 }
 
 /* INPUT RESPONSIVO */
 input[type="text"] {
-  width: 100%;           /* 100% da largura no mobile */
+  width: 100%;
   padding: 12px;
   margin-top: 5px;
   border: 1px solid #ccc;
@@ -48,13 +51,12 @@ button {
   color: #fff;
   border: none;
   padding: 12px 20px;
-  margin: 6px;
-  border-radius: 6px;
+  margin: 6px 0;
+  border-radius: 8px;
   cursor: pointer;
-  transition: background 0.2s ease;
-  font-size: 16px;
-  width: 100%;           /* botões em largura total no mobile */
-  max-width: 250px;      /* mas não exageram no desktop */
+  font-size: 17px;
+  width: 100%;
+  max-width: 350px;
 }
 
 button:hover {
@@ -70,22 +72,52 @@ button:hover {
   background: #fafafa;
   display: flex;
   flex-wrap: wrap;
-  gap: 12px;
+  gap: 10px;
 }
 
-/* --- BREAKPOINT --- */
-/* Melhorias em telas muito pequenas */
-@media (max-width: 560px ) {
+/* ---------------------------------------------------------------- */
+/* 📌  OTIMIZAÇÃO EXCLUSIVA PARA CELULARES HD (720p)                */
+/* ---------------------------------------------------------------- */
+@media (max-width: 420px) {   /* resolução CSS equivalente ao HD real */
+  .container {
+    padding: 14px;
+    margin-top: 20px;
+  }
+
   h1 {
-    font-size: 22px;
+    font-size: 20px;
+  }
+
+  label {
+    font-size: 14px;
+  }
+
+  input[type="text"] {
+    font-size: 15px;
+    padding: 10px;
   }
 
   button {
     font-size: 15px;
-    padding: 10px 16px;
+    padding: 10px 14px;
+    border-radius: 6px;
   }
 
-  .container {
-    padding: 15px;
+  #preview {
+    padding: 10px;
+    gap: 8px;
+  }
+}
+
+/* ---------------------------------------------------------------- */
+/* 📌  Ajuste extra para telas MUITO estreitas (Android antigos)    */
+/* ---------------------------------------------------------------- */
+@media (max-width: 360px) {
+  button {
+    font-size: 14px;
+  }
+
+  input[type="text"] {
+    font-size: 14px;
   }
 }
