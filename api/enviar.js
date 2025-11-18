@@ -7,12 +7,17 @@ const upload = multer();
 // Função para obter token fixo da conta Hotmail
 async function getAccessToken() {
   const token = process.env.GRAPH_TOKEN;
+  console.log(GRAPH_TOKEN);
   if (!token) throw new Error("Token da conta Hotmail não configurado.");
   return token;
 }
 
 async function uploadToOneDrive(token, localizador, file, index, total) {
   const extension = file.originalname.split(".").pop();
+  console.log(extension);
+  console.log(localizador);
+
+  // ver depois
   let filename;
   if (total === 1) {
     filename = `${localizador}.${extension}`;
@@ -21,12 +26,14 @@ async function uploadToOneDrive(token, localizador, file, index, total) {
   }
 
   const url = `https://graph.microsoft.com/v1.0/me/drive/root:/Evidencias/${filename}:/content`;
+  console.log("URL" + url);
 
   const resp = await fetch(url, {
     method: "PUT",
     headers: {
       "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/octet-stream"
+      "Content-Type": "application/octet-stream",
+      "Access-Control-Allow-Origin": "https://lrbagagensdanificadas.vercel.app/"
     },
     body: file.buffer
   });
@@ -59,18 +66,19 @@ async function sendMailWithAttachments(token, localizador, files) {
         content: `Segue em anexo os arquivos referentes ao localizador ${localizador}`
       },
       toRecipients: [
-        { emailAddress: { address: "ll.poa@voeazul.com.br" } }
+        { emailAddress: { address: "ll.poa@hotmail.com" } }
       ],
       attachments
     },
     saveToSentItems: true
   };
 
-  const resp = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", {
+  const resp = await fetch("https://graph.microsoft.com/v1.0/me/sendMail", { // não existe
     method: "POST",
     headers: {
       "Authorization": `Bearer ${token}`,
-      "Content-Type": "application/json"
+      "Content-Type": "application/json",
+      "Access-Control-Allow-Origin": "https://lrbagagensdanificadas.vercel.app/"
     },
     body: JSON.stringify(email)
   });
