@@ -75,7 +75,7 @@ button:hover {
 
 /* --- BREAKPOINT --- */
 /* Melhorias em telas muito pequenas */
-@media (max-width: 480px) {
+@media (max-width: 560px ) {
   h1 {
     font-size: 22px;
   }
