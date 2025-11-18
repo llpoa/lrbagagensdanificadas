@@ -5,7 +5,7 @@ const BACKEND_URL = "https://lrbagagensdanificadas.vercel.app/api/enviar.js";
 
 // Função para formatar localizador
 function formatarLocalizador(input) {
-  input.value = input.value.toUpperCase().slice(0,6); //.replace(/[^A-Z0-9]/g, "");
+  input.value = input.value.toUpperCase(); //.replace(/[^A-Z0-9]/g, "");
 }
 
 // Elementos principais
